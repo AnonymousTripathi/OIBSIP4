@@ -41,3 +41,26 @@ function logout() {
     localStorage.removeItem("loggedIn");
     window.location.href = "login.html";
 }
+// RESET PASSWORD
+function resetPassword() {
+    const username = document.getElementById("fpUsername").value;
+    const newPassword = document.getElementById("newPassword").value;
+
+    if (!username || !newPassword) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user || user.username !== username) {
+        alert("User not found");
+        return;
+    }
+
+    user.password = newPassword;
+    localStorage.setItem("user", JSON.stringify(user));
+
+    alert("Password reset successful!");
+    window.location.href = "login.html";
+}
